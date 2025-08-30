@@ -2,17 +2,13 @@ name: Android CI
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+
+env:
+  ANGLE_REPO: whitebelyash/ANGLE
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    env:
-      FFMPEG_PLUGIN_KEYSTORE_PASSWORD: ${{ secrets.FFMPEG_PLUGIN_KEYSTORE_PASSWORD }}
     steps:
     - uses: actions/checkout@v3
     - name: set up JDK 11
@@ -21,25 +17,47 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
+        
+    - name: Create libs directory
+      run: mkdir ./app/libs
+
+    - name: Download arm artifact
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        name: angle-libs-arm
+        path: ./app/libs/arm/
+        repo: $ANGLE_REPO
+
+    - name: Download arm64 artifact
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        name: angle-libs-arm64
+        path: ./app/libs/arm64/
+        repo: $ANGLE_REPO
+
+    - name: Download x86 artifact
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        name: angle-libs-x86
+        path: ./app/libs/x86/
+        repo: $ANGLE_REPO
+
+    - name: Download x86_64 artifact
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        name: angle-libs-x86
+        path: ./app/libs/x86_64/
+        repo: $ANGLE_REPO
+
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-        sudo apt install nasm autogen
-        ./scripts/setup_environ.sh
-        ./scripts/build_libs.sh
-        ./gradlew assembleRelease
-        ./gradlew bundleRelease
+        ./gradlew assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: app-release
-        path: app/build/outputs/apk/release/app-release.apk
-
-    - name: Upload AAB
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-release-aab
-        path: app/build/outputs/bundle/release/app-release.aab
+        name: app-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
