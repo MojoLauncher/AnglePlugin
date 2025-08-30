@@ -51,7 +51,7 @@ jobs:
     - name: Download x86_64 artifact
       uses: dawidd6/action-download-artifact@v11
       with:
-        name: angle-libs-x86
+        name: angle-libs-x86_64
         path: ./app/src/main/jniLibs/x86_64/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
