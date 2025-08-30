@@ -25,7 +25,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v11
       with:
         name: angle-libs-arm
-        path: ./app/src/main/jniLibs/arm/
+        path: ./app/src/main/jniLibs/armeabi-v7a/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
         workflow_conclusion: success
@@ -34,7 +34,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v11
       with:
         name: angle-libs-arm64
-        path: ./app/src/main/jniLibs/arm64/
+        path: ./app/src/main/jniLibs/arm64-v8a/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
         workflow_conclusion: success
