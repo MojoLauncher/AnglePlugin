@@ -19,13 +19,13 @@ jobs:
         cache: gradle
 
     - name: Create libs directory
-      run: mkdir ./app/src/jniLibs
+      run: mkdir ./app/src/main/jniLibs
 
     - name: Download arm artifact
       uses: dawidd6/action-download-artifact@v11
       with:
         name: angle-libs-arm
-        path: ./app/src/jniLibs/arm/
+        path: ./app/src/main/jniLibs/arm/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
         workflow_conclusion: success
@@ -34,7 +34,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v11
       with:
         name: angle-libs-arm64
-        path: ./app/src/jniLibs/arm64/
+        path: ./app/src/main/jniLibs/arm64/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
         workflow_conclusion: success
@@ -43,7 +43,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v11
       with:
         name: angle-libs-x86
-        path: ./app/src/jniLibs/x86/
+        path: ./app/src/main/jniLibs/x86/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
         workflow_conclusion: success
@@ -52,7 +52,7 @@ jobs:
       uses: dawidd6/action-download-artifact@v11
       with:
         name: angle-libs-x86
-        path: ./app/src/jniLibs/x86_64/
+        path: ./app/src/main/jniLibs/x86_64/
         repo: ${{ env.ANGLE_REPO }}
         workflow: angle-android.yml
         workflow_conclusion: success
