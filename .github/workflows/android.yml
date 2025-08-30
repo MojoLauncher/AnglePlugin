@@ -27,6 +27,8 @@ jobs:
         name: angle-libs-arm
         path: ./app/libs/arm/
         repo: ${{ env.ANGLE_REPO }}
+        workflow: angle-android.yml
+        workflow_conclusion: success
 
     - name: Download arm64 artifact
       uses: dawidd6/action-download-artifact@v11
@@ -34,6 +36,8 @@ jobs:
         name: angle-libs-arm64
         path: ./app/libs/arm64/
         repo: ${{ env.ANGLE_REPO }}
+        workflow: angle-android.yml
+        workflow_conclusion: success
 
     - name: Download x86 artifact
       uses: dawidd6/action-download-artifact@v11
@@ -41,6 +45,8 @@ jobs:
         name: angle-libs-x86
         path: ./app/libs/x86/
         repo: ${{ env.ANGLE_REPO }}
+        workflow: angle-android.yml
+        workflow_conclusion: success
 
     - name: Download x86_64 artifact
       uses: dawidd6/action-download-artifact@v11
@@ -48,6 +54,8 @@ jobs:
         name: angle-libs-x86
         path: ./app/libs/x86_64/
         repo: ${{ env.ANGLE_REPO }}
+        workflow: angle-android.yml
+        workflow_conclusion: success
 
 
     - name: Grant execute permission for gradlew
