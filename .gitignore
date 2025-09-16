@@ -13,6 +13,7 @@
 /ffmpeg-kit/
 /app/libs/lib/
 /app/libs/libraries.jar
+/app/libs/angle.aar
 .externalNativeBuild
 .cxx
 local.properties

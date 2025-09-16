@@ -20,44 +20,16 @@ jobs:
         cache: gradle
 
     - name: Create libs directory
-      run: mkdir ./app/src/main/jniLibs
+      run: mkdir ./app/libs
 
-    - name: Download arm artifact
+    - name: Download AAR
       uses: dawidd6/action-download-artifact@v11
       with:
-        name: angle-libs-arm
-        path: ./app/src/main/jniLibs/armeabi-v7a/
-        repo: ${{ env.ANGLE_REPO }}
-        workflow: angle-android.yml
+        name: angle-aar
+        path: ./app/libs
+        repo: MojoLauncher/angle-builder
+        workflow: blank.yml
         workflow_conclusion: success
-
-    - name: Download arm64 artifact
-      uses: dawidd6/action-download-artifact@v11
-      with:
-        name: angle-libs-arm64
-        path: ./app/src/main/jniLibs/arm64-v8a/
-        repo: ${{ env.ANGLE_REPO }}
-        workflow: angle-android.yml
-        workflow_conclusion: success
-
-    - name: Download x86 artifact
-      uses: dawidd6/action-download-artifact@v11
-      with:
-        name: angle-libs-x86
-        path: ./app/src/main/jniLibs/x86/
-        repo: ${{ env.ANGLE_REPO }}
-        workflow: angle-android.yml
-        workflow_conclusion: success
-
-    - name: Download x86_64 artifact
-      uses: dawidd6/action-download-artifact@v11
-      with:
-        name: angle-libs-x64
-        path: ./app/src/main/jniLibs/x86_64/
-        repo: ${{ env.ANGLE_REPO }}
-        workflow: angle-android.yml
-        workflow_conclusion: success
-
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
